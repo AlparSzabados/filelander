@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active:
+
+swagger:
+  host:
+    addr: localhost
+    port: 8080
+
