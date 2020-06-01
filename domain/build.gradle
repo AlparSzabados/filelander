@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id "org.springframework.boot" version "2.0.1.RELEASE"
+    id 'maven-publish'
+    id 'maven'
 }
 
 dependencies {
@@ -21,4 +24,31 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+}
+
+version '0.1.0-SNAPSHOT'
+
+springBoot {
+    mainClassName = 'org.filelander.FilelanderApplication'
+}
+
+publishing.repositories {
+    maven {
+        name 'nexus'
+        def releasesRepoUrl = "http://192.168.1.10:8031/repository/test2/"
+        def snapshotsRepoUrl = "http://192.168.1.10:8031/repository/test/"
+        url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        credentials {
+            username 'filelander'
+            password 'filelander'
+        }
+    }
+}
+
+publishing.publications {
+    maven(MavenPublication) {
+        artifact("${projectDir}/build/libs/domain-$version" + ".jar") {
+            extension 'jar'
+        }
+    }
 }
