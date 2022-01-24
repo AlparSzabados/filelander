@@ -25,7 +25,7 @@ public class FilelanderService {
 
         final Map<Long, List<String>> compfiles = files.entrySet().stream().filter(e->e.getValue().size()>1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        ForkJoinPool forkJoinPool = new ForkJoinPool(1000);
+        ForkJoinPool forkJoinPool = new ForkJoinPool(100);
 
         Map<String, List<String>> x = new HashMap<>();
         final AtomicInteger i = new AtomicInteger(1);
