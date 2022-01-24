@@ -8,5 +8,4 @@ public class FilelanderApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FilelanderApplication.class, args);
 	}
-
 }

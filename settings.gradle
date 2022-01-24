@@ -10,4 +10,4 @@
 rootProject.name = 'filelander'
 
 include "api"
-include "domain"
+include "app"

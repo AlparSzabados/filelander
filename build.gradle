@@ -6,12 +6,44 @@
  * User Manual available at https://docs.gradle.org/6.4.1/userguide/java_library_plugin.html
  */
 
+plugins {
+    id 'java'
+    id "org.sonarqube" version "2.7"
+}
+
 allprojects {
     repositories {
         mavenCentral()
     }
     group = 'org.filelander'
-    version = '0.1.0'
+    version = '0.1-SNAPSHOT'
 }
 
+subprojects {
+
+    apply plugin: 'maven-publish'
+
+    publishing.repositories {
+        maven {
+            name 'nexus'
+            def releasesRepoUrl = "http://192.168.1.10:8031/repository/test2/"
+            def snapshotsRepoUrl = "http://192.168.1.10:8031/repository/test/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username 'filelander'
+                password 'filelander'
+            }
+        }
+    }
+
+    publishing.publications {
+
+        maven(MavenPublication) {
+            artifact("${projectDir}/build/libs/$artifactId-$version" + ".jar") {
+                extension 'jar'
+            }
+        }
+    }
+
+}
 

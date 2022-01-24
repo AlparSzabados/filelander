@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.0.1.RELEASE"
+}
+
+dependencies {
+
+    implementation project(':api')
+
+    // Spring Boot Starter Web
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.3.0.RELEASE'
+
+    // Swagger2
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+
+    // Swagger-UI
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    // Use JUnit test framework
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+springBoot {
+    mainClassName = 'org.filelander.FilelanderApplication'
+}
+
+publishMavenPublicationToNexusRepository.onlyIf { bootJar.didWork }
+
