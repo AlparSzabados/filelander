@@ -2,8 +2,11 @@ spring:
   profiles:
     active:
 
+server:
+  port: 8090
+
 swagger:
   host:
     addr: localhost
-    port: 8080
+    port: 8090
 
